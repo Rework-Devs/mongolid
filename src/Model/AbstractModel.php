@@ -154,7 +154,7 @@ abstract class AbstractModel implements ModelInterface
         if (sizeof($attachs) > 0) {
             foreach ($attachs as $name => $model) {
                 if (!method_exists($instance, $name)) {
-                    throw new Exception('Could not attach to non existing relation ' . $name . '.');
+                    throw new \Exception('Could not attach to non existing relation ' . $name . '.');
                 }
                 $instance->{$name}()->attach($model);
             }
