@@ -227,7 +227,8 @@ abstract class AbstractModel implements ModelInterface
     public function getCollectionName(): string
     {
         if (!$this->collection) {
-            throw new NoCollectionNameException();
+            $path = explode('\\', get_class($this));
+            return \Illuminate\Support\Str::plural(strtolower(array_pop($path)));
         }
 
         return $this->collection;
