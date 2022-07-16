@@ -134,6 +134,17 @@ abstract class AbstractModel implements ModelInterface
 
         return $instance->getBuilder();
     }
+    
+    /**
+     * Create an new object into database.
+     */
+    public function create(array $data): bool
+    {
+        foreach ($data as $key => $value) {
+            $this->setDocumentAttribute($key, $value);
+        }
+        return $this->save();
+    }
 
     /**
      * Saves this object into database.
