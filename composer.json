@@ -1,5 +1,5 @@
 {
-    "name": "leroy-merlin-br/mongolid",
+    "name": "rework-devs/mongolid",
     "description": "Easy, powerful and ultrafast ODM for PHP and MongoDB.",
     "keywords": ["odm", "mongodb", "mongo", "nosql", "active record", "laravel"],
     "license": "MIT",
@@ -18,10 +18,10 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
+        "php": ">=8.0",
         "ext-mongodb": "*",
-        "illuminate/container": "^5.4 || ^6.0 || ^7.0 || ^8.0",
-        "illuminate/support": "^5.4 || ^6.0 || ^7.0 || ^8.0",
+        "illuminate/container": "^5.4 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+        "illuminate/support": "^5.4 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
         "mongodb/mongodb": "^1.4"
     },
     "require-dev": {
