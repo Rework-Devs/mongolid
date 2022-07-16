@@ -1,6 +1,7 @@
 <?php
 namespace Mongolid\Model;
 
+use Illuminate\Database\Eloquent\MassAssignmentException;
 use MongoDB\Collection;
 use MongoDB\Driver\WriteConcern;
 use Mongolid\Connection\Connection;
@@ -142,7 +143,11 @@ abstract class AbstractModel implements ModelInterface
     {
         $instance = new static();
         foreach ($data as $key => $value) {
-            $instance->setDocumentAttribute($key, $value);
+            if (in_array($key, $instance->fillable) || (sizeof($instance->guarded) > 0 && !in_array($key, $instance->guarded))) {
+                $instance->setDocumentAttribute($key, $value);
+            } else {
+                throw new MassAssignmentException('Field ' . $key . ' not allowed.');
+            }
         }
         $instance->save();
         return self::first($instance->_id);
@@ -180,6 +185,18 @@ abstract class AbstractModel implements ModelInterface
         return $this->execute('delete');
     }
 
+    /**
+     * Deletes this object in database.
+     */
+    public static function truncate(): bool
+    {
+        $instance = new static();
+        foreach ($instance->all() as $register) {
+            $register->delete();
+        }
+        return true;
+    }
+    
     /**
      * Dynamically retrieve attributes on the model.
      *
