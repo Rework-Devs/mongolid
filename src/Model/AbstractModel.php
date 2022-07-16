@@ -138,12 +138,14 @@ abstract class AbstractModel implements ModelInterface
     /**
      * Create an new object into database.
      */
-    public function create(array $data): bool
+    public static function create(array $data): AbstractModel
     {
+        $instance = new static();
         foreach ($data as $key => $value) {
-            $this->setDocumentAttribute($key, $value);
+            $instance->setDocumentAttribute($key, $value);
         }
-        return $this->save();
+        $instance->save();
+        return self::first($instance->_id);
     }
 
     /**
