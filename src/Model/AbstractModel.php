@@ -258,7 +258,7 @@ abstract class AbstractModel implements ModelInterface
     {
         if (!$this->collection) {
             $path = explode('\\', get_class($this));
-            return \Illuminate\Support\Str::plural(strtolower(array_pop($path)));
+            return \Illuminate\Support\Str::of(array_pop($path))->snake()->plural()->value;
         }
 
         return $this->collection;
