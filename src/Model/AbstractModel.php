@@ -139,7 +139,7 @@ abstract class AbstractModel implements ModelInterface
     /**
      * Create an new object into database.
      */
-    public static function create(array $data): AbstractModel
+    public static function create(array $data, array $attachs = []): AbstractModel
     {
         $instance = new static();
         foreach ($data as $key => $value) {
@@ -150,6 +150,17 @@ abstract class AbstractModel implements ModelInterface
             }
         }
         $instance->save();
+
+        if (sizeof($attachs) > 0) {
+            foreach ($attachs as $name => $model) {
+                if (!method_exists($instance, $name)) {
+                    throw new Exception('Could not attach to non existing relation ' . $name . '.');
+                }
+                $instance->{$name}()->attach($model);
+            }
+            $instance->save();
+        }
+
         return self::first($instance->_id);
     }
 
