@@ -149,6 +149,7 @@ abstract class AbstractModel implements ModelInterface
                 throw new MassAssignmentException('Field ' . $key . ' not allowed.');
             }
         }
+        $instance->__unset('relationsService');
         $instance->save();
 
         if (sizeof($attachs) > 0) {
@@ -169,6 +170,7 @@ abstract class AbstractModel implements ModelInterface
      */
     public function save(): bool
     {
+        $this->__unset('relationsService');
         return $this->execute('save');
     }
 
@@ -177,6 +179,7 @@ abstract class AbstractModel implements ModelInterface
      */
     public function insert(): bool
     {
+        $this->__unset('relationsService');
         return $this->execute('insert');
     }
 
@@ -185,6 +188,7 @@ abstract class AbstractModel implements ModelInterface
      */
     public function update(): bool
     {
+        $this->__unset('relationsService');
         return $this->execute('update');
     }
 
