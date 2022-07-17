@@ -255,7 +255,7 @@ class Cursor implements CursorInterface, Serializable
     public function toArray(): array
     {
         foreach ($this->getCursor() as $document) {
-            $result[] = (array) $document;
+            $result[] = (array) $document->getAttributes();
         }
 
         return $result ?? [];
