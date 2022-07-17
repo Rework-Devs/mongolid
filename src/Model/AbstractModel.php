@@ -202,9 +202,7 @@ abstract class AbstractModel implements ModelInterface
     public static function truncate(): bool
     {
         $instance = new static();
-        foreach ($instance->all() as $register) {
-            $register->delete();
-        }
+        $instance->getCollection()->drop();
         return true;
     }
     
