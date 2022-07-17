@@ -104,6 +104,11 @@ trait HasAttributesTrait
         return $object;
     }
 
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+    
     /**
      * {@inheritdoc}
      */
